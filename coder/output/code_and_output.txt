@@ -1,0 +1,55 @@
+```hcl
+# main.tf
+
+provider "aws" {
+  region = "us-east-1"  # Specify your desired AWS region
+}
+
+resource "aws_s3_bucket" "bucket_jv1" {
+  bucket = "jv1"
+  acl    = "private" # Setting the Access Control List (ACL) for the bucket
+
+  tags = {
+    Name        = "jv1"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "bucket_jv2" {
+  bucket = "jv2"
+  acl    = "private" # Setting the Access Control List (ACL) for the bucket
+
+  tags = {
+    Name        = "jv2"
+    Environment = "Dev"
+  }
+}
+
+output "bucket_jv1_name" {
+  value = aws_s3_bucket.bucket_jv1.id
+}
+
+output "bucket_jv2_name" {
+  value = aws_s3_bucket.bucket_jv2.id
+}
+```
+
+To execute the Terraform code:
+
+1. Save the code in a file named `main.tf`.
+2. Run the following commands in your terminal:
+   - Initialize the Terraform working directory: 
+     ```
+     terraform init
+     ```
+   - Preview the changes that will be applied:
+     ```
+     terraform plan
+     ```
+   - Apply the changes to create the S3 buckets:
+     ```
+     terraform apply
+     ```
+   - Confirm the action by typing "yes" when prompted.
+  
+After running the apply command, Terraform will create two S3 buckets named `jv1` and `jv2`, and you will see the output showing the names of the created buckets.
